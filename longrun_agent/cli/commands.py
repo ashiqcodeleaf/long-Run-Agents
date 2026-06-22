@@ -12,6 +12,8 @@ class CommandDef:
 
 
 COMMANDS: tuple[CommandDef, ...] = (
+    CommandDef("config", "Show or initialize behavior config."),
+    CommandDef("session", "Create, list, inspect, and export local sessions."),
     CommandDef("status", "Show LongRun Agent home, database, and version."),
 )
 
