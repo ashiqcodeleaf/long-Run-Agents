@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+.venv/
+venv/
+
+# Build metadata
+*.egg-info/
+build/
+dist/
+
+# Local runtime state
+.env
+.longrun-agent/
+
+# Editor/system files
+.DS_Store
+Thumbs.db
