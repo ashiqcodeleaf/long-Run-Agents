@@ -8,10 +8,23 @@ from typing import Any
 
 
 DEFAULT_CONFIG: dict[str, Any] = {
+    "provider": "openai-api",
     "model": "gpt-4.1-mini",
     "max_iterations": 90,
+    "reasoning": {"effort": "medium"},
+    "verbose": False,
     "approvals": {"mode": "default"},
+    "openai": {"base_url": "https://api.openai.com/v1"},
+    "codex": {"base_url": "https://chatgpt.com/backend-api/codex"},
+    "context": {
+        "max_tokens": 128000,
+        "compression_threshold_tokens": 96000,
+        "tail_messages": 12,
+        "context_file_max_chars": 12000,
+    },
 }
+
+DEFAULT_CODEX_MODEL = "gpt-5.4-mini"
 
 
 def get_longrun_home() -> Path:
@@ -34,7 +47,13 @@ def ensure_home() -> Path:
         home / "plugins",
         home / "mcp",
         home / "checkpoints",
+        home / "file-state",
         home / "long-run",
+        home / "long-run" / "boards",
+        home / "cron",
+        home / "cron" / "output",
+        home / "processes",
+        home / "processes" / "logs",
     ):
         child.mkdir(parents=True, exist_ok=True)
     return home
@@ -48,8 +67,64 @@ def env_path() -> Path:
     return get_longrun_home() / ".env"
 
 
+def auth_path() -> Path:
+    return get_longrun_home() / "auth.json"
+
+
+def processes_path() -> Path:
+    return get_longrun_home() / "processes" / "processes.json"
+
+
+def process_logs_dir() -> Path:
+    return get_longrun_home() / "processes" / "logs"
+
+
+def file_state_path() -> Path:
+    return get_longrun_home() / "file-state" / "file_state.json"
+
+
+def checkpoints_dir() -> Path:
+    return get_longrun_home() / "checkpoints"
+
+
+def checkpoints_manifest_path() -> Path:
+    return checkpoints_dir() / "checkpoints.json"
+
+
 def state_db_path() -> Path:
     return get_longrun_home() / "state.db"
+
+
+def memory_path() -> Path:
+    return get_longrun_home() / "memory.json"
+
+
+def plugin_state_path() -> Path:
+    return get_longrun_home() / "plugins" / "plugins.json"
+
+
+def mcp_servers_path() -> Path:
+    return get_longrun_home() / "mcp" / "servers.json"
+
+
+def mcp_tools_cache_path() -> Path:
+    return get_longrun_home() / "mcp" / "tools.json"
+
+
+def long_run_boards_dir() -> Path:
+    return get_longrun_home() / "long-run" / "boards"
+
+
+def cron_dir() -> Path:
+    return get_longrun_home() / "cron"
+
+
+def cron_jobs_path() -> Path:
+    return cron_dir() / "jobs.json"
+
+
+def cron_output_dir() -> Path:
+    return cron_dir() / "output"
 
 
 def load_config() -> dict[str, Any]:

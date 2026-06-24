@@ -25,6 +25,7 @@ understood before the next block is written.
 - MCP tool connections.
 - Subagents.
 - Long-Run durable task workflow.
+- CLI-only cron/scheduled agent jobs.
 - Approvals, guardrails, checkpoints, and rollback.
 
 ## What We Are Not Building
@@ -38,7 +39,7 @@ understood before the next block is written.
 - Voice.
 - Image generation.
 - Non-OpenAI model providers.
-- Cron scheduler in the first MVP.
+- Gateway-delivered cron notifications.
 
 ## Naming
 
@@ -66,3 +67,17 @@ Do not copy huge files blindly. For every stage:
 
 The user decides when to move from one stage to the next.
 
+## Agent Surfaces In This MVP
+
+LongRun currently has seven CLI-only agent execution surfaces:
+
+1. Interactive foreground agent: `uv run longrun`, then normal chat or `/goal`.
+2. One-shot agent: `uv run longrun chat "task"`.
+3. Synchronous subagent: `uv run longrun agents delegate "task"`.
+4. Background agent process: `uv run longrun background start "task"`.
+5. Durable local queue: `uv run longrun queue add "task"`.
+6. Long-Run board worker/orchestrator: `uv run longrun long-run ...`.
+7. Cron-triggered agent: `uv run longrun cron add ...` and `uv run longrun cron run <id>`.
+
+Read [AGENTS_AND_CRON.md](AGENTS_AND_CRON.md) for the spawning model, cron
+commands, and Long-Run workflow details.

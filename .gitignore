@@ -14,7 +14,13 @@ dist/
 
 # Local runtime state
 .env
+.longrun/
 .longrun-agent/
+.longrun-agent-test/
+.longrun-stage7-test/
+stage*-smoke-transcript.md
+tmp-agent-*/
+tmp-execute-code-proof/
 
 # Editor/system files
 .DS_Store
